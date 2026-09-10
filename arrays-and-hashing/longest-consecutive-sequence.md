@@ -16,7 +16,7 @@ The numbers do not need to appear consecutively in the original array. The solut
 var longestConsecutive = function(nums) {
     const numbers = new Set(nums);
     let longest = 0;
-
+ 
     for (const number of numbers) {
         // Only begin counting if this is the start of a sequence.
         if (!numbers.has(number - 1)) {
@@ -35,6 +35,8 @@ var longestConsecutive = function(nums) {
     return longest;
 };
 ```
+
+
 
 ## Step-by-step explanation
 
@@ -70,6 +72,8 @@ A `Set` removes duplicates and lets us quickly check whether a number exists.
 numbers.has(3);  // true
 numbers.has(12); // false
 ```
+
+
 
 ### 2. Look at every number
 
@@ -141,3 +145,4 @@ This prevents the same sequence from being counted repeatedly.
 
 - Time: `O(n)`
 - Space: `O(n)`
+
