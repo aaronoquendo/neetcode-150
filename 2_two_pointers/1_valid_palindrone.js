@@ -4,17 +4,50 @@ class Solution {
    * @return {boolean}
    */
   isPalindrome(s) {
-    let left = 0, right = s.length - 1, isValid = true; // two pointers + result flag
-    while (left < right) { // move inward
-      while (left < right && !this.isAlphaNum(s[left])) left++; // skip non-alphanumeric
-      while (left < right && !this.isAlphaNum(s[right])) right--; // skip non-alphanumeric
-      if (s[left].toLowerCase() !== s[right].toLowerCase()) { isValid = false; break; } // compare lowercase
-      left++; right--; // move pointers
-    }
-    return isValid; // single return
+
+      let left = 0;
+      let right = s.length - 1;
+      let isValid = true;
+
+      while (left < right) {
+
+          // Skip non-alphanumeric characters from the left
+          while (left < right && !this.isAlphaNum(s[left])) {
+              left++;
+          }
+
+          // Skip non-alphanumeric characters from the right
+          while (left < right && !this.isAlphaNum(s[right])) {
+              right--;
+          }
+
+          // Compare lowercase characters
+          if (s[left].toLowerCase() !== s[right].toLowerCase()) {
+              isValid = false;
+              break;
+          }
+
+          // Move both pointers inward
+          left++;
+          right--;
+      }
+
+      return isValid;
   }
-  isAlphaNum(c) { // helper to check alphanumeric
-    let code = c.charCodeAt(0); // ASCII code
-    return (code >= 48 && code <= 57) || (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
+
+  // Helper function to check if character is alphanumeric
+  isAlphaNum(c) {
+
+      let code = c.charCodeAt(0);
+
+      if (
+          (code >= 48 && code <= 57) ||
+          (code >= 65 && code <= 90) ||
+          (code >= 97 && code <= 122)
+      ) {
+          return true;
+      } else {
+          return false;
+      }
   }
 }

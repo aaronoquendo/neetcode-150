@@ -1,21 +1,37 @@
-class Solution {
-    /**
-     * @param {string} s
-     * @return {boolean}
-     */
-    isValid(s) {
-      let stack = []; // stack to track open brackets
-      let pairs = { ')': '(', '}': '{', ']': '[' }; // matching pairs
-      let isValid = true; // result flag
-      for (let i = 0; i < s.length; i++) { // iterate through string
-        let char = s[i];
-        if (!pairs[char]) stack.push(char); // if opening bracket, push
-        else {
-          if (stack.length === 0 || stack[stack.length - 1] !== pairs[char]) { isValid = false; break; } // mismatch
-          stack.pop(); // matched pair, remove open bracket
-        }
+var isValid = function(s) {
+  let stack = [];
+  let result = true;
+
+  let pairs = {
+      ")": "(",
+      "}": "{",
+      "]": "["
+  };
+
+  for (let i = 0; i < s.length; i++) {
+      let char = s[i];
+
+      // Opening bracket → save it
+      if (char === "(" || char === "{" || char === "[") {
+          stack.push(char);
+      } else {
+          // Closing bracket → check the most recent opening bracket
+          let lastOpening = stack.pop();
+
+          if (lastOpening !== pairs[char]) {
+              result = false;
+              break;
+          }
       }
-      if (stack.length !== 0) isValid = false; // leftover open brackets
-      return isValid; // single return
-    }
   }
+
+  // Make sure there aren't unmatched opening brackets
+  if (stack.length > 0) {
+      result = false;
+  }
+
+  return result;
+};
+// Time: O(n)
+// Space: O(n)
+// Pattern: Stack
